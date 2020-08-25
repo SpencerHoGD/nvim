@@ -114,6 +114,7 @@ noremap S :w<CR>
 " Open the vimrc file anytime
 noremap <LEADER>rc :vs ~/.config/nvim/init.vim<CR>
 
+" (){}
 map \p i(<Esc>ea)<Esc>
 map \c i{<Esc>ea}<Esc>
 
@@ -177,7 +178,7 @@ noremap s <nop>
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
 noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap sj :set splitbelow<CR>:split<CR>
-noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+"noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
@@ -225,7 +226,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
 " Move the next character to the end of the line with ctrl+9
-inoremap <C-9> <ESC>lx$p
+" inoremap <C-> <ESC>lx$p
 
 " Opening a terminal window
 noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
@@ -245,7 +246,7 @@ noremap <C-c> zz
 autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
-noremap tx :r !figlet
+"noremap tx :r !figlet
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -270,14 +271,11 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " noremap u k
 " noremap e j
 " noremap i l
-
-
 " noremap k i
 " noremap K I
 " noremap l u
-
-
 " map s <nop>
 
 colorscheme default
+colorscheme darkblue
 

@@ -1,11 +1,12 @@
-" set runtimepath^=~/.vim runtimepath+=~/.vim/after
-" let &packpath = &runtimepath
-
 " __  ____   __  _   ___     _____ __  __ ____   ____
 "|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
+
+
+" set runtimepath^=~/.vim runtimepath+=~/.vim/after
+" let &packpath = &runtimepath
 
 
 " ===
@@ -86,6 +87,7 @@ set smartcase
 
 "edit
 "set spell spelllang=en_us
+set nospell
 
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
@@ -284,7 +286,7 @@ noremap tml :+tabmove<CR>
 " Snippets
 source ~/.config/nvim/md-snippets.vim
 " auto spell
-autocmd BufRead,BufNewFile *.md setlocal spell
+" autocmd BufRead,BufNewFile *.md setlocal spell
 
 " ===
 " === Other useful stuff

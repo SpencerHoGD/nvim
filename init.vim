@@ -331,7 +331,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " comment one line with # 
 noremap <LEADER>m I#<SPACE><ESC>0
 noremap <LEADER>n 0xx
-
+" comment one line with " 
+noremap <LEADER>v I"<SPACE><ESC>0
 
 
 " Compile function

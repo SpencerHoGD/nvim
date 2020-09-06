@@ -415,6 +415,9 @@ exec "nohlsearch"
 call plug#begin('~/.config/nvim/plugged')
 
 
+" Translation
+Plug 'voldikss/vim-translator'
+
 " Testing my own plugin
 " Plug 'theniceboy/vim-calc'
 
@@ -1339,17 +1342,33 @@ let g:bullets_enabled_file_types = [
 " nnoremap j :AnyJump<CR>
 " let g:any_jump_window_width_ratio  = 0.8
 " let g:any_jump_window_height_ratio = 0.9
-" 
-" 
+
+
 " " ===
 " " === typescript-vim
 " " ===
 " let g:typescript_ignore_browserwords = 1
-" 
+
 " " ===
 " " === Agit
 " " ===
 " nnoremap <LEADER>gl :Agit<CR>
 " let g:agit_no_default_mappings = 1
+
+" " ===
+" " === vim-translator
+" " ===
+" Echo translation in the cmdline
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+" Display translation in a window
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+" Replace the text with translation
+nmap <silent> <Leader>r <Plug>TranslateR
+vmap <silent> <Leader>r <Plug>TranslateRV
+" Translate the text in clipboard
+nmap <silent> <Leader>x <Plug>TranslateX
+
 
 " ===================== End of Plugin Settings =====================

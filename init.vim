@@ -406,6 +406,7 @@ noremap <LEADER>v I"<SPACE><ESC>0j
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
+" let g:netrw_browsex_viewer= "firefox"
 
 
 " ===
@@ -743,8 +744,8 @@ let g:instant_markdown_autostart = 0
 " let g:instant_markdown_mathjax = 1
 " let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 let g:instant_markdown_autoscroll = 1
-let g:instant_markdown_port = 8888
-let g:instant_markdown_python = 1
+" let g:instant_markdown_port = 8888
+" let g:instant_markdown_python = 1
 
 
 " ===
@@ -781,42 +782,42 @@ let g:bullets_enabled_file_types = [
 " === FZF
 " ===
 " set rtp+=/usr/local/opt/fzf
-" set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
-" set rtp+=/home/david/.linuxbrew/opt/fzf
-" " noremap <silent> <C-p> :Files<CR>
+" An action can be a reference to a function that processes selected lines
 " noremap <silent> <C-p> :Leaderf file<CR>
-" noremap <silent> <C-f> :Rg<CR>
-" noremap <silent> <C-h> :History<CR>
-" "noremap <C-t> :BTags<CR>
-" noremap <silent> <C-l> :Lines<CR>
+noremap <silent> <C-p> :Files<CR>
+noremap <silent> <C-c> :Rg<CR>
+noremap <silent> <C-h> :History<CR>
+"noremap <C-t> :BTags<CR>
+noremap <silent> <C-l> :Lines<CR>
 " noremap <silent> <C-w> :Buffers<CR>
-" noremap <leader>; :History:<CR>
-" 
+noremap <leader>; :History:<CR>
+
 " let g:fzf_preview_window = 'right:60%'
 " let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-" 
-" function! s:list_buffers()
-"   redir => list
-"   silent ls
-"   redir END
-"   return split(list, "\n")
-" endfunction
-" 
-" function! s:delete_buffers(lines)
-"   execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
-" endfunction
-" 
-" command! BD call fzf#run(fzf#wrap({
-"   \ 'source': s:list_buffers(),
-"   \ 'sink*': { lines -> s:delete_buffers(lines) },
-"   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-" \ }))
-" 
-" noremap <c-d> :BD<CR>
-" 
-" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-" 
-" 
+
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
+
+noremap <c-e> :BD<CR>
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+
 " " ===
 " " === Leaderf
 " " ===
@@ -1372,3 +1373,4 @@ nmap <silent> <Leader>x <Plug>TranslateX
 
 
 " ===================== End of Plugin Settings =====================
+

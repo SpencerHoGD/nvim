@@ -176,13 +176,27 @@ let mapleader=" "
 " noremap ; :
 
 " Save & quit
-noremap Q :q<CR>
+" noremap S :w<CR>
+" noremap Q :q<CR>
+" noremap <LEADER>sa :w<CR>
+" noremap <LEADER>qu :q<CR>
 noremap <C-q> :qa<CR>
-noremap S :w<CR>
 
 " Open the vimrc file anytime
 " noremap <LEADER>rc :vsp ~/.config/nvim/init.vim<CR>
 noremap <LEADER>rc :vsp $MYVIMRC<CR>
+
+" Open the .zshrc file anytime
+noremap <LEADER>sh :vsp ~/.zshrc<CR>
+
+" Open the env.zsh file anytime
+noremap <LEADER>env :vsp ~/.config/zsh/env.zsh<CR>
+
+" Open myfilelist anytime
+noremap <LEADER>fl :tabedit ~/myfilelist.md<CR>
+" Inline open (goto) file
+noremap <LEADER>op 0f/gf
+
 
 " (){}
 map \p i(<Esc>ea)<Esc>
@@ -243,8 +257,8 @@ cnoremap <M-w> <S-Right>
 " ===
 " === Searching
 " ===
-noremap - N
-noremap = n
+noremap - Nzz
+noremap = nzz
 
 " ===
 " === Window management
@@ -285,7 +299,7 @@ noremap srh <C-w>b<C-w>K
 noremap srv <C-w>b<C-w>H
 
 " Press <SPACE> + q to close the window below the current window
-noremap <LEADER>q <C-w>j:q<CR>
+" noremap <LEADER>q <C-w>j:q<CR>
 
 " ===
 " === Tab management
@@ -784,15 +798,23 @@ let g:bullets_enabled_file_types = [
 " set rtp+=/usr/local/opt/fzf
 " An action can be a reference to a function that processes selected lines
 " noremap <silent> <C-p> :Leaderf file<CR>
-noremap <silent> <C-p> :Files<CR>
-noremap <silent> <C-c> :Rg<CR>
-noremap <silent> <C-h> :History<CR>
-"noremap <C-t> :BTags<CR>
+" lines of all files in current dir
+noremap <silent> <C-k> :Rg<CR>
+" lines in all buffer or hisroty?
 noremap <silent> <C-l> :Lines<CR>
-" noremap <silent> <C-w> :Buffers<CR>
+" file name in current dir
+noremap <silent> <C-p> :Files<CR>
 noremap <leader>; :History:<CR>
+"noremap <C-t> :BTags<CR>
+" noremap <silent> <C-w> :Buffers<CR>
+noremap <c-e> :BD<CR>
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 
-" let g:fzf_preview_window = 'right:60%'
+let g:fzf_preview_window = 'right:60%'
 " let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 function! s:list_buffers()
@@ -806,13 +828,7 @@ function! s:delete_buffers(lines)
   execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
-command! BD call fzf#run(fzf#wrap({
-  \ 'source': s:list_buffers(),
-  \ 'sink*': { lines -> s:delete_buffers(lines) },
-  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-\ }))
 
-noremap <c-e> :BD<CR>
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_history_dir = '~/.local/share/fzf-history'

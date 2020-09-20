@@ -190,8 +190,9 @@ noremap <LEADER>rc :vsp $MYVIMRC<CR>
 " Open the .zshrc file anytime
 noremap <LEADER>sh :vsp ~/.zshrc<CR>
 
-" Open the env.zsh file anytime
+" Open the env.zsh aliases.zsh file anytime
 noremap <LEADER>env :vsp /home/sp/.config/zsh/env.zsh<CR>
+noremap <LEADER>ali :vsp /home/sp/.config/zsh/aliases.zsh<CR>
 
 " Open myfilelist anytime
 noremap <LEADER>fl :tabedit /home/sp/.config/nvim/myfilelist.md<CR>

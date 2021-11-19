@@ -15,8 +15,8 @@
 " ===
 " === Auto load for first time uses
 " ===
-if empty(glob('/root/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo /root/.config/nvim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -26,16 +26,16 @@ endif
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
 " ===
 let has_machine_specific_file = 1
-if empty(glob('/root/.config/nvim/_machine_specific.vim'))
+if empty(glob('~/.config/nvim/_machine_specific.vim'))
 	let has_machine_specific_file = 0
-	silent! exec "!cp /root/.config/nvim/default_configs/_machine_specific_default.vim /root/.config/nvim/_machine_specific.vim"
+	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
-source /root/.config/nvim/_machine_specific.vim
+source ~/.config/nvim/_machine_specific.vim
 
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
-	exec "e /root/.config/nvim/_machine_specific.vim"
+	exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
 
@@ -95,14 +95,14 @@ set nowrapscan    "This stops the search at the end of the file.
 "set spell spelllang=en_us
 set nospell
 
-silent !mkdir -p /root/.config/nvim/tmp/backup
-silent !mkdir -p /root/.config/nvim/tmp/undo
-"silent !mkdir -p /root/.config/nvim/tmp/sessions
-set backupdir=/root/.config/nvim/tmp/backup,.
-set directory=/root/.config/nvim/tmp/backup,.
+silent !mkdir -p ~/.config/nvim/tmp/backup
+silent !mkdir -p ~/.config/nvim/tmp/undo
+"silent !mkdir -p ~/.config/nvim/tmp/sessions
+set backupdir=~/.config/nvim/tmp/backup,.
+set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
 	set undofile
-	set undodir=/root/.config/nvim/tmp/undo,.
+	set undodir=~/.config/nvim/tmp/undo,.
 endif
 
 " set shada='1000,f1,<500
@@ -177,30 +177,30 @@ let mapleader=" "
 
 " Save & quit
 noremap S :w<CR>
-noremap R :source /root/.config/nvim/init.vim<CR>
+noremap R :source ~/.config/nvim/init.vim<CR>
 noremap Q :q<CR>
 " noremap <LEADER>sa :w<CR>
 " noremap <LEADER>qu :q<CR>
 noremap <C-q> :qa<CR>
 
 " Open the vimrc file anytime
-noremap <LEADER>rc :vsp /root/.config/nvim/init.vim<CR>
+noremap <LEADER>rc :vsp ~/.config/nvim/init.vim<CR>
 "noremap <LEADER>rc :vsp $MYVIMRC<CR>
 
 " Open the .zshrc file anytime
 noremap <LEADER>sh :vsp ~/.zshrc<CR>
 
 " Open the env.zsh aliases.zsh file anytime
-noremap <LEADER>env :vsp /root/.config/zsh/env.zsh<CR>
-noremap <LEADER>ali :vsp /root/.config/zsh/aliases.zsh<CR>
+noremap <LEADER>env :vsp ~/.config/zsh/env.zsh<CR>
+noremap <LEADER>ali :vsp ~/.config/zsh/aliases.zsh<CR>
 
 " Open myfilelist anytime
-noremap <LEADER>fl :tabedit /root/.config/nvim/myfilelist.md<CR>
+noremap <LEADER>fl :tabedit ~/.config/nvim/myfilelist.md<CR>
 " Inline open (goto) file
 "noremap <LEADER>op 0f/gf
 
 " Open md-snippets anytime
-noremap <LEADER>md :vsp /root/.config/nvim/md-snippets.vim<CR>
+noremap <LEADER>md :vsp ~/.config/nvim/md-snippets.vim<CR>
 
 
 " (){}
@@ -322,7 +322,7 @@ noremap tml :+tabmove<CR>
 " === Markdown Settings
 " ===
 " Snippets
-" source /root/.config/nvim/md-snippets.vim
+" source ~/.config/nvim/md-snippets.vim
 " auto spell
 " autocmd BufRead,BufNewFile *.md setlocal spell
 
@@ -432,7 +432,7 @@ noremap t :call CompileRunGcc()<CR>
 " === Install Plugins with Vim-Plug
 " ===
 
-call plug#begin('/root/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 
 " Translation

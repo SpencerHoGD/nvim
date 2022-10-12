@@ -4,22 +4,18 @@
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
-
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
-
-
-
 
 
 " ===
 " === Auto load for first time uses
 " ===
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" if empty(glob('~/.config/nvim/autoload/plug.vim'))
+" 	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+" 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" endif
 
 
 " ===
@@ -41,6 +37,74 @@ endif
 
 " colorscheme default
 colorscheme darkblue
+
+"copy from powervim
+
+" 快速移动到行首，行尾
+map <Leader>1 ^
+map <Leader>2 $
+" 打开文件
+nmap <Leader>e :e<Space>
+" 不关闭文件推出
+nmap <Leader>z <C-Z>
+" 水平分隔
+nmap <Leader>s :Sex<CR>
+" 竖直分隔
+nmap <Leader>v :Vex<CR>
+" delete and append to file
+nnoremap ff :. w>> ./EconomistList-knownWords.txt<CR>dd
+
+
+
+" 粘贴到系统剪切板
+map <Leader>y "*y
+" 使用ctrlc, v就可以实现vim之间的复制粘贴
+" vnoremap <C-c> :w! /tmp/clipboard.txt <CR>
+" inoremap <C-v> <Esc>:r /tmp/clipboard.txt <CR>
+"显示匹配
+set showmatch
+"括号匹配
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+autocmd InsertEnter * se cul    " 用浅色高亮当前行"
+" shortcut for markdown
+" 创建时间快捷键for markdown
+nmap tm :call SetTime() <CR>
+func SetTime()
+        call append(line("."), "\# ".strftime('%a %d %b %Y'))
+endfunc
+
+nmap tb :call SetTable() <CR>
+func SetTable()
+        call append(line("."), "\| | | ")
+        call append(line(".")+1, "\|---|---|")
+        call append(line(".")+2, "\| | |")
+endfunc
+
+nmap pc :call SetPic() <CR>
+func SetPic()
+        call append(line("."), "\<img src='' width=600 alt=''> </img></div>")
+endfunc
+
+nmap pi :call SetPic1() <CR>
+func SetPic1()
+        call append(line("."), "\![]()")
+endfunc
+
+nmap vi :call SetVideo() <CR>
+func SetVideo()
+        call append(line("."), "\<video src='1.mp4' controls='controls' width='640' height='320' autoplay='autoplay'> Your browser does not support the video tag.</video></div>")
+endfunc
+
+nmap cl :call SetCollor() <CR>
+func SetCollor()
+        call append(line("."), "<span  style='color: #f16707;'> </span>")
+endfunc
+
+
+"copy from powervim end
 
 "basic set
 syntax on               "开启
@@ -172,19 +236,18 @@ let g:terminal_color_14 = '#9AEDFE'
 " === Basic Mappings
 " ===
 " Set <LEADER> as <SPACE>, ; as :
-let mapleader=" "
+let mapleader=";"
 " noremap ; :
 
 " Save & quit
-noremap S :w<CR>
+noremap <LEADER>w :w<CR>
 noremap R :source ~/.config/nvim/init.vim<CR>
-noremap Q :q<CR>
-" noremap <LEADER>sa :w<CR>
-" noremap <LEADER>qu :q<CR>
+noremap <LEADER>q :q<CR>
 noremap <C-q> :qa<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :vsp ~/.config/nvim/init.vim<CR>
+
 "noremap <LEADER>rc :vsp $MYVIMRC<CR>
 
 " Open the .zshrc file anytime
@@ -342,9 +405,9 @@ noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 inoremap <LEADER>, <++>
-inoremap <LEADER>e <Esc>
-vnoremap <LEADER>e <Esc>
-cnoremap <LEADER>e <Esc>
+inoremap <LEADER>ee <Esc>
+vnoremap <LEADER>ee <Esc>
+cnoremap <LEADER>ee <Esc>
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
@@ -513,6 +576,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Go
 " myselfmark Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }

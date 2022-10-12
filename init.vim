@@ -4,43 +4,107 @@
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
-
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
-
-
-
 
 
 " ===
 " === Auto load for first time uses
 " ===
-if empty(glob('/home/sp/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo /home/sp/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" if empty(glob('~/.config/nvim/autoload/plug.vim'))
+" 	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+" 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" endif
 
 
 " ===
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
 " ===
 let has_machine_specific_file = 1
-if empty(glob('/home/sp/.config/nvim/_machine_specific.vim'))
+if empty(glob('~/.config/nvim/_machine_specific.vim'))
 	let has_machine_specific_file = 0
-	silent! exec "!cp /home/sp/.config/nvim/default_configs/_machine_specific_default.vim /home/sp/.config/nvim/_machine_specific.vim"
+	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
-source /home/sp/.config/nvim/_machine_specific.vim
+source ~/.config/nvim/_machine_specific.vim
 
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
-	exec "e /home/sp/.config/nvim/_machine_specific.vim"
+	exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
 
 " colorscheme default
 colorscheme darkblue
+
+"copy from powervim
+
+" 快速移动到行首，行尾
+map <Leader>1 ^
+map <Leader>2 $
+" 打开文件
+nmap <Leader>e :e<Space>
+" 不关闭文件推出
+nmap <Leader>z <C-Z>
+" 水平分隔
+nmap <Leader>s :Sex<CR>
+" 竖直分隔
+nmap <Leader>v :Vex<CR>
+" delete and append to file
+nnoremap ff :. w>> ./EconomistList-knownWords.txt<CR>dd
+
+
+
+" 粘贴到系统剪切板
+map <Leader>y "*y
+" 使用ctrlc, v就可以实现vim之间的复制粘贴
+" vnoremap <C-c> :w! /tmp/clipboard.txt <CR>
+" inoremap <C-v> <Esc>:r /tmp/clipboard.txt <CR>
+"显示匹配
+set showmatch
+"括号匹配
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+autocmd InsertEnter * se cul    " 用浅色高亮当前行"
+" shortcut for markdown
+" 创建时间快捷键for markdown
+nmap tm :call SetTime() <CR>
+func SetTime()
+        call append(line("."), "\# ".strftime('%a %d %b %Y'))
+endfunc
+
+nmap tb :call SetTable() <CR>
+func SetTable()
+        call append(line("."), "\| | | ")
+        call append(line(".")+1, "\|---|---|")
+        call append(line(".")+2, "\| | |")
+endfunc
+
+nmap pc :call SetPic() <CR>
+func SetPic()
+        call append(line("."), "\<img src='' width=600 alt=''> </img></div>")
+endfunc
+
+nmap pi :call SetPic1() <CR>
+func SetPic1()
+        call append(line("."), "\![]()")
+endfunc
+
+nmap vi :call SetVideo() <CR>
+func SetVideo()
+        call append(line("."), "\<video src='1.mp4' controls='controls' width='640' height='320' autoplay='autoplay'> Your browser does not support the video tag.</video></div>")
+endfunc
+
+nmap cl :call SetCollor() <CR>
+func SetCollor()
+        call append(line("."), "<span  style='color: #f16707;'> </span>")
+endfunc
+
+
+"copy from powervim end
 
 "basic set
 syntax on               "开启
@@ -95,14 +159,14 @@ set nowrapscan    "This stops the search at the end of the file.
 "set spell spelllang=en_us
 set nospell
 
-silent !mkdir -p /home/sp/.config/nvim/tmp/backup
-silent !mkdir -p /home/sp/.config/nvim/tmp/undo
-"silent !mkdir -p /home/sp/.config/nvim/tmp/sessions
-set backupdir=/home/sp/.config/nvim/tmp/backup,.
-set directory=/home/sp/.config/nvim/tmp/backup,.
+silent !mkdir -p ~/.config/nvim/tmp/backup
+silent !mkdir -p ~/.config/nvim/tmp/undo
+"silent !mkdir -p ~/.config/nvim/tmp/sessions
+set backupdir=~/.config/nvim/tmp/backup,.
+set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
 	set undofile
-	set undodir=/home/sp/.config/nvim/tmp/undo,.
+	set undodir=~/.config/nvim/tmp/undo,.
 endif
 
 " set shada='1000,f1,<500
@@ -172,35 +236,34 @@ let g:terminal_color_14 = '#9AEDFE'
 " === Basic Mappings
 " ===
 " Set <LEADER> as <SPACE>, ; as :
-let mapleader=" "
+let mapleader=";"
 " noremap ; :
 
 " Save & quit
-noremap S :w<CR>
-noremap R :source /home/sp/.config/nvim/init.vim<CR>
-noremap Q :q<CR>
-" noremap <LEADER>sa :w<CR>
-" noremap <LEADER>qu :q<CR>
+noremap <LEADER>w :w<CR>
+noremap R :source ~/.config/nvim/init.vim<CR>
+noremap <LEADER>q :q<CR>
 noremap <C-q> :qa<CR>
 
 " Open the vimrc file anytime
-noremap <LEADER>rc :vsp /home/sp/.config/nvim/init.vim<CR>
+noremap <LEADER>rc :vsp ~/.config/nvim/init.vim<CR>
+
 "noremap <LEADER>rc :vsp $MYVIMRC<CR>
 
 " Open the .zshrc file anytime
 noremap <LEADER>sh :vsp ~/.zshrc<CR>
 
 " Open the env.zsh aliases.zsh file anytime
-noremap <LEADER>env :vsp /home/sp/.config/zsh/env.zsh<CR>
-noremap <LEADER>ali :vsp /home/sp/.config/zsh/aliases.zsh<CR>
+noremap <LEADER>env :vsp ~/.config/zsh/env.zsh<CR>
+noremap <LEADER>ali :vsp ~/.config/zsh/aliases.zsh<CR>
 
 " Open myfilelist anytime
-noremap <LEADER>fl :tabedit /home/sp/.config/nvim/myfilelist.md<CR>
+noremap <LEADER>fl :tabedit ~/.config/nvim/myfilelist.md<CR>
 " Inline open (goto) file
 "noremap <LEADER>op 0f/gf
 
 " Open md-snippets anytime
-noremap <LEADER>md :vsp /home/sp/.config/nvim/md-snippets.vim<CR>
+noremap <LEADER>md :vsp ~/.config/nvim/md-snippets.vim<CR>
 
 
 " (){}
@@ -322,7 +385,7 @@ noremap tml :+tabmove<CR>
 " === Markdown Settings
 " ===
 " Snippets
-" source /home/sp/.config/nvim/md-snippets.vim
+" source ~/.config/nvim/md-snippets.vim
 " auto spell
 " autocmd BufRead,BufNewFile *.md setlocal spell
 
@@ -342,9 +405,9 @@ noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 inoremap <LEADER>, <++>
-inoremap <LEADER>e <Esc>
-vnoremap <LEADER>e <Esc>
-cnoremap <LEADER>e <Esc>
+inoremap <LEADER>ee <Esc>
+vnoremap <LEADER>ee <Esc>
+cnoremap <LEADER>ee <Esc>
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
@@ -432,7 +495,7 @@ noremap t :call CompileRunGcc()<CR>
 " === Install Plugins with Vim-Plug
 " ===
 
-call plug#begin('/home/sp/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 
 " Translation
@@ -513,6 +576,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Go
 " myselfmark Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }

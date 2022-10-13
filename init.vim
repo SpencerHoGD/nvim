@@ -41,26 +41,28 @@ colorscheme darkblue
 "copy from powervim
 
 " 快速移动到行首，行尾
-map <Leader>1 ^
-map <Leader>2 $
+map <LEADER>1 ^
+map <LEADER>2 $
+noremap <LEADER>1 ^
+noremap <LEADER>2 $
 " 打开文件
-nmap <Leader>e :e<Space>
+nmap <LEADER>e :e<Space>
 " 不关闭文件推出
-nmap <Leader>z <C-Z>
+nmap <LEADER>z <C-Z>
 " 水平分隔
-nmap <Leader>s :Sex<CR>
+nmap <LEADER>s :Sex<CR>
 " 竖直分隔
-nmap <Leader>v :Vex<CR>
+nmap <LEADER>v :Vex<CR>
 " delete and append to file
 nnoremap ff :. w>> ./EconomistList-knownWords.txt<CR>dd
 
 
 
 " 粘贴到系统剪切板
-map <Leader>y "*y
+map <LEADER>y "*y
 " 使用ctrlc, v就可以实现vim之间的复制粘贴
-" vnoremap <C-c> :w! /tmp/clipboard.txt <CR>
-" inoremap <C-v> <Esc>:r /tmp/clipboard.txt <CR>
+" vnoremap <C-c> :w! ~/.tmp/clipboard.txt <CR>
+" inoremap <C-v> <Esc>:r ~/.tmp/clipboard.txt <CR>
 "显示匹配
 set showmatch
 "括号匹配
@@ -83,6 +85,7 @@ func SetTable()
         call append(line(".")+2, "\| | |")
 endfunc
 
+
 nmap pc :call SetPic() <CR>
 func SetPic()
         call append(line("."), "\<img src='' width=600 alt=''> </img></div>")
@@ -103,8 +106,8 @@ func SetCollor()
         call append(line("."), "<span  style='color: #f16707;'> </span>")
 endfunc
 
-
 "copy from powervim end
+
 
 "basic set
 syntax on               "开启
@@ -243,9 +246,10 @@ let mapleader=";"
 noremap <LEADER>w :w<CR>
 noremap R :source ~/.config/nvim/init.vim<CR>
 noremap <LEADER>q :q<CR>
+noremap <LEADER>a :wq<CR>
 noremap <C-q> :qa<CR>
 
-" Open the vimrc file anytime
+" Open the init.vim file anytime
 noremap <LEADER>rc :vsp ~/.config/nvim/init.vim<CR>
 
 "noremap <LEADER>rc :vsp $MYVIMRC<CR>
@@ -332,7 +336,7 @@ inoremap <C-a> <ESC>A
 " === Window management
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
+" noremap <LEADER>w <C-w>w
 noremap <LEADER>k <C-w>k
 noremap <LEADER>j <C-w>j
 noremap <LEADER>h <C-w>h
@@ -435,10 +439,10 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " comment one line with # 
-noremap <LEADER>m I#<SPACE><ESC>0j
-noremap <LEADER>n 0xxj
+noremap <LEADER>m I#<SPACE><ESC>^j
+noremap <LEADER>n ^xxj
 " comment one line with 
-noremap <LEADER>v I"<SPACE><ESC>0j
+noremap <LEADER>v I"<SPACE><ESC>^j
 
 
  " Compile function
@@ -722,4 +726,3 @@ let g:vmt_fence_closing_text = '/TOC'
 
 
 " ===================== End of Plugin Settings =====================
-

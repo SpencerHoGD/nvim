@@ -246,7 +246,6 @@ let mapleader=";"
 noremap <LEADER>w :w<CR>
 noremap R :source ~/.config/nvim/init.vim<CR>
 noremap <LEADER>q :q<CR>
-noremap <LEADER>a :wq<CR>
 noremap <C-q> :qa<CR>
 
 " Open the init.vim file anytime
@@ -260,6 +259,7 @@ noremap <LEADER>sh :vsp ~/.zshrc<CR>
 " Open the env.zsh aliases.zsh file anytime
 noremap <LEADER>env :vsp ~/.config/zsh/env.zsh<CR>
 noremap <LEADER>ali :vsp ~/.config/zsh/aliases.zsh<CR>
+noremap <LEADER>the :vsp ~/.config/zsh/themes.zsh<CR>
 
 " Open myfilelist anytime
 noremap <LEADER>fl :tabedit ~/.config/nvim/myfilelist.md<CR>

@@ -1,9 +1,3 @@
-" __  ____   __  _   ___     _____ __  __ ____   ____
-"|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
-"| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
-"| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
-"|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
-
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
 
@@ -54,7 +48,7 @@ nmap <LEADER>s :Sex<CR>
 " 竖直分隔
 nmap <LEADER>v :Vex<CR>
 " delete and append to file
-nnoremap ff :. w>> ./EconomistList-knownWords.txt<CR>dd
+" nnoremap ff :. w>> ./EconomistList-knownWords.txt<CR>dd
 
 
 

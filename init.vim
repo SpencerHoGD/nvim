@@ -1,5 +1,4 @@
-" set runtimepath^=~/.vim runtimepath+=~/.vim/after
-" let &packpath = &runtimepath
+
 
 
 " ===
@@ -10,6 +9,8 @@
 " 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 " endif
+
+
 
 
 " ===
@@ -489,6 +490,17 @@ noremap t :call CompileRunGcc()<CR>
 " let g:netrw_browsex_viewer= "chromium"
 
 
+" === hxm
+" === vim-plug automatic installation for nvim
+" ===
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+
 " ===
 " === Install Plugins with Vim-Plug
 " ===
@@ -519,7 +531,7 @@ Plug 'voldikss/vim-translator'
 " File navigation
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " myselfmark Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " myselfmark Plug 'kevinhwang91/rnvimr'
 " myselfmark Plug 'airblade/vim-rooter'
@@ -532,7 +544,7 @@ Plug 'junegunn/fzf.vim'
 " Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python --enable-go'}
 
 " Auto Complete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " myselfmark Plug 'wellle/tmux-complete.vim'
 
 " Snippets
@@ -602,7 +614,7 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] 
 
 " Editor Enhancement
 "Plug 'Raimondi/delimitMate'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " myselfmark Plug 'mg979/vim-visual-multi'
 " myselfmark Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
 " myselfmark Plug 'theniceboy/antovim' " gs to switch
